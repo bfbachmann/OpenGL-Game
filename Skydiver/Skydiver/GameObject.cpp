@@ -23,16 +23,13 @@ void GameObject::render() {
     int x = location->getX();
     int y = location->getY();
 
-    
     glBegin(GL_TRIANGLES);
     glColor3f(1.f, 0.f, 1.f);
     glVertex2f(-x/2, -y/2);
     glColor3f(0.f, 1.f, 1.f);
     glVertex2f(-x/2, y/2);
-    glColor3f(0.f, 0.f, 1.f);
+    glColor3f(0.5f, 0.5f, 0.5f);
     glVertex2f(x, y);
-    glColor3f(1.f, 0.f, 1.f);
-    glVertex2f(x/2, -y/2);
     glEnd();
 }
 
