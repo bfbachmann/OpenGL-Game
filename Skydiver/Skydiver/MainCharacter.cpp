@@ -12,24 +12,22 @@
 MainCharacter::MainCharacter(float x, float y) {
     location = new Location(x, y);
     
-    std::cout << "Main character created" << std::endl;
+    std::cout << "Main character created." << std::endl;
 }
 
 
 void MainCharacter::render() {
-    
-    std::cout << "Main character rendered at " << location->getX() << ", " << location->getY() << std::endl;
     
     int x = location->getX();
     int y = location->getY();
     
     glBegin(GL_TRIANGLES);
     glColor3f(1.f, 0.f, 1.f);
-    glVertex2f(-x/5, -y/5);
+    glVertex3f(x, y, 1.0f);
     glColor3f(0.f, 1.f, 1.f);
-    glVertex2f(-x/5, y/5);
+    glVertex3f(x+1, y, 1.0f);
     glColor3f(0.5f, 0.5f, 0.5f);
-    glVertex2f(x/5, y/5);
+    glVertex3f(x, y+1, 1.0f);
     glEnd();
 }
 
