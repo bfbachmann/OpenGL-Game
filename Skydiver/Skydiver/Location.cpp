@@ -50,22 +50,22 @@ bool Location::equals(Location *otherLocation) {
 
 
 void Location::moveUp() {
-    y = y - 1.0;
+    y = y + 0.1;
 }
 
 
 void Location::moveDown() {
-    y = y + 1.0;
+    y = y - 0.1;
 } 
 
 
 void Location::moveLeft() {
-    x = x- 1.0;
+    x = x - 0.1;
 }
 
 
 void Location::moveRight() {
-    x = x + 1.0;
+    x = x + 0.1;
 }
 
 

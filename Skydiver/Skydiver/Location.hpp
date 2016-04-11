@@ -31,6 +31,7 @@ public:
     void moveRight();
     bool equals(Location *otherLocation);
     void set(float newX, float newY);
+    void print(std::string name);
 };
 
 #endif /* Location_hpp */
