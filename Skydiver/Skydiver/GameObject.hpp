@@ -21,9 +21,10 @@ private:
     Location *location;
     
 public:
+    
     GameObject();
-    void render();
-    Location *getLocation();
+    virtual void render() = 0;
+    Location *getLocation() { return location; }
 };
 
 #endif /* GameObject_hpp */

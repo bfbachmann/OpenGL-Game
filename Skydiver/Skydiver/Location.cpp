@@ -10,14 +10,18 @@
 
 
 Location::Location() {
-    x = 0;
-    y = 0;
+    x = 0.0;
+    y = 0.0;
+    
+    std::cout << "\tDefualt locaiton created" << std::endl;
 }
 
 
-Location::Location(int newX, int newY) {
+Location::Location(float newX, float newY) {
     x = newX;
     y = newY;
+    
+    std::cout << "\tNew location (" << x << ", " << y << ")" << std::endl;
 }
 
 
@@ -45,7 +49,27 @@ bool Location::equals(Location *otherLocation) {
 }
 
 
-void Location::set(int newX, int newY) {
+void Location::moveUp() {
+    y = y - 1.0;
+}
+
+
+void Location::moveDown() {
+    y = y + 1.0;
+} 
+
+
+void Location::moveLeft() {
+    x = x- 1.0;
+}
+
+
+void Location::moveRight() {
+    x = x + 1.0;
+}
+
+
+void Location::set(float newX, float newY) {
     x = newX;
     y = newY;
 }

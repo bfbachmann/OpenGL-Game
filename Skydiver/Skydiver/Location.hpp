@@ -16,17 +16,21 @@
 
 class Location {
 private:
-    int x;
-    int y;
+    float x;
+    float y;
     
 public:
     Location();
-    Location(int x, int y);
-    int getX() { return x; }
-    int getY() { return y; }
+    Location(float x, float y);
+    float getX() { return x; }
+    float getY() { return y; }
     void moveTowards(Location *destination);
+    void moveUp();
+    void moveDown();
+    void moveLeft();
+    void moveRight();
     bool equals(Location *otherLocation);
-    void set(int newX, int newY);
+    void set(float newX, float newY);
 };
 
 #endif /* Location_hpp */
