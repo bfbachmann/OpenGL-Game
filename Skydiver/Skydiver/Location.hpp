@@ -14,10 +14,15 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+
 class Location {
 private:
     float x;
     float y;
+    bool up;
+    bool down;
+    bool left;
+    bool right;
     
 public:
     Location();
@@ -25,10 +30,10 @@ public:
     float getX() { return x; }
     float getY() { return y; }
     void moveTowards(Location *destination);
-    void moveUp();
-    void moveDown();
-    void moveLeft();
-    void moveRight();
+    void moveUp(float);
+    void moveDown(float);
+    void moveLeft(float);
+    void moveRight(float);
     bool equals(Location *otherLocation);
     void set(float newX, float newY);
     void print(std::string name);

@@ -12,13 +12,17 @@
 
 
 MainCharacter::MainCharacter(float x, float y) {
+    moveSpeed = 0.05;
     location = new Location(x, y);
+    up = down = left = right = false;
     
     std::cout << "Main character created." << std::endl;
 }
 
 
 void MainCharacter::render() {
+    
+    updateLocation();
         
     float x = location->getX();
     float y = location->getY();
@@ -34,6 +38,35 @@ void MainCharacter::render() {
     
     glEnd();
     glFlush();
+}
+
+
+void MainCharacter::updateMovement(Direction dir, bool go) {
+    if (dir == Direction::up) {
+        up = go;
+    } else if (dir == Direction::down) {
+        down = go;
+    } else if (dir == Direction::left) {
+        left = go;
+    } else if (dir == Direction::right) {
+        right = go;
+    }
+}
+
+
+void MainCharacter::updateLocation() {
+    if (up) {
+        location->moveUp(moveSpeed);
+    }
+    if (down) {
+        location->moveDown(moveSpeed);
+    }
+    if (left) {
+        location->moveLeft(moveSpeed);
+    }
+    if (right) {
+        location->moveRight(moveSpeed);
+    }
 }
 
 

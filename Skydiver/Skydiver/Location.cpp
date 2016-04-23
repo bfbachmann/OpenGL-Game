@@ -12,6 +12,7 @@
 Location::Location() {
     x = 0.0;
     y = 0.0;
+    up = down = left = right = false;
     
     std::cout << "\tDefualt locaiton created" << std::endl;
 }
@@ -25,6 +26,7 @@ Location::Location(float newX, float newY) {
 }
 
 
+//TODO: fix this
 void Location::moveTowards(Location *destination) {
     if (destination->getX() > x) {
         x++;
@@ -49,23 +51,23 @@ bool Location::equals(Location *otherLocation) {
 }
 
 
-void Location::moveUp() {
-    y = y + 0.1;
+void Location::moveUp(float amount) {
+    y = y + amount;
 }
 
 
-void Location::moveDown() {
-    y = y - 0.1;
+void Location::moveDown(float amount) {
+    y = y - amount;
 } 
 
 
-void Location::moveLeft() {
-    x = x - 0.1;
+void Location::moveLeft(float amount) {
+    x = x - amount;
 }
 
 
-void Location::moveRight() {
-    x = x + 0.1;
+void Location::moveRight(float amount) {
+    x = x + amount;
 }
 
 

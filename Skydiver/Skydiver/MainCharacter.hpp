@@ -13,10 +13,16 @@
 #include "GameObject.hpp"
 #include "Location.hpp"
 
+enum Direction {up, down, left, right};
 
 class MainCharacter : public GameObject {
 private:
     Location *location;
+    bool up;
+    bool down;
+    bool left;
+    bool right;
+    float moveSpeed;
     
 public:
     MainCharacter(float x, float y);
@@ -24,6 +30,8 @@ public:
     
     void render();
     Location *getLocation() { return location; }
+    void updateMovement(enum Direction, bool);
+    void updateLocation();
 };
 
 
