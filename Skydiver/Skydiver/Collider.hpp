@@ -21,11 +21,10 @@ public:
     GameObject *parent;
     
     Collider();
-    ~Collider();
     
     void setParent(GameObject* newParent) { parent = newParent; }
     virtual bool isColliding(GameObject) = 0;
-    virtual Location contactPoint(GameObject) = 0;
+    virtual Location *contactPoint(GameObject) = 0;
     Location *getLocation() { return parent->getLocation(); }
 };
 

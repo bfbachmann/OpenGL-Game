@@ -58,3 +58,8 @@ bool BoxCollider::isColliding(GameObject candidate) {
 //    if (caxMin )
     return true;
 }
+
+
+Location *BoxCollider::contactPoint(GameObject candidate) {
+    return NULL;
+}
