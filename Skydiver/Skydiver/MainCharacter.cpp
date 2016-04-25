@@ -12,11 +12,9 @@
 
 
 MainCharacter::MainCharacter(float x, float y) {
-    moveSpeed = 0.05;
+    moveSpeed = 0.02;
     location = new Location(x, y);
     up = down = left = right = false;
-    
-    std::cout << "Main character created." << std::endl;
 }
 
 

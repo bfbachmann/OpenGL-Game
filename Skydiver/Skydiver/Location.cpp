@@ -77,6 +77,12 @@ void Location::set(float newX, float newY) {
 }
 
 
+void Location::set(Location loc) {
+    x = loc.x;
+    y = loc.y;
+}
+
+
 void Location::print(std::string name) {
     std::cout << "\t" << name << " location: (" << x << ", " << y << ")" << std::endl;
 }

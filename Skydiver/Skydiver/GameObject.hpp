@@ -15,15 +15,20 @@
 #include <GLFW/glfw3.h>
 #include "Location.hpp"
 
+class Collider;
 
 class GameObject {
 private:
     Location *location;
+    Collider *collider;
     
 public:
     
     GameObject();
+    ~GameObject();
     virtual void render() = 0;
+    void addCollider(Collider * newCollider);
+    Collider *getCollider() { return collider; }
     Location *getLocation() { return location; }
 };
 

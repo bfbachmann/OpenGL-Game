@@ -36,6 +36,7 @@ public:
     void moveRight(float);
     bool equals(Location *otherLocation);
     void set(float newX, float newY);
+    void set(Location loc);
     void print(std::string name);
 };
 
