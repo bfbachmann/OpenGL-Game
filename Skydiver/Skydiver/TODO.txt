@@ -1,0 +1,3 @@
+refactor GameWindow into class instead of struct
+	check for collisions on each frame
+	apply physics
