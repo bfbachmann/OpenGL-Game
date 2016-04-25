@@ -19,7 +19,6 @@ GameObject::GameObject() {
 
 
 GameObject::~GameObject() {
-    delete collider;
     delete location;
 }
 

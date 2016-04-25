@@ -32,7 +32,7 @@ void MainCharacter::render() {
     glColor3f(0.f, 1.f, 0.f);
     glVertex2f(x+0.2f, y-0.1f);
     glColor3f(0.f, 0.f, 1.f);
-    glVertex2f(x+0.f, y+0.2f);
+    glVertex2f(x, y+0.2f);
     
     glEnd();
     glFlush();

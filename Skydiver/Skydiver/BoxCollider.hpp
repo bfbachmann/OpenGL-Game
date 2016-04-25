@@ -19,7 +19,7 @@ private:
     float yRange;
     
 public:
-    BoxCollider();
+    BoxCollider(float width, float height);
     ~BoxCollider();
     
     void setBounds(float width, float height);

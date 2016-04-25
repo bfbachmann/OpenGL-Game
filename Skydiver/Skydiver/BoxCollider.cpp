@@ -7,10 +7,15 @@
 //
 
 #include "BoxCollider.hpp"
+#include <math.h>
 
 
 using namespace std;
 
+
+BoxCollider::BoxCollider(float width, float height) {
+    setBounds(width, height);
+}
 
 
 void BoxCollider::setBounds(float width, float height) {
@@ -45,21 +50,20 @@ bool BoxCollider::isColliding(GameObject candidate) {
     float canxRange = candidateBounds[0];
     float canyRange = candidateBounds[1];
     
-    float xMin = parentX - xRange;
-    float xMax = parentX + xRange;
-    float yMin = parentY + yRange;
-    float yMax = parentY - yRange;
-    
-    float canxMin = candidateX - xRange;
-    float canxMax = candidateX + xRange;
-    float canyMin = candidateY + yRange;
-    float canyMax = candidateY - yRange;
-    
-//    if (caxMin )
-    return true;
+    if ((fabs(parentX - candidateX) <= xRange + canxRange) && (fabs(parentY - candidateY) <= yRange + canyRange)) return true;
+    return false;
 }
 
 
+
 Location *BoxCollider::contactPoint(GameObject candidate) {
+//    if (this->isColliding(candidate)) {
+//        Location *candidateLocation = candidate.getLocation();
+//        Location parentLocation
+//    }
+    
+    
+    //TODO: IMPLEMENT THIS
     return NULL;
+
 }
