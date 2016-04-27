@@ -18,7 +18,7 @@ using namespace std;
 
 MainCharacter::MainCharacter(float x, float y) {
     moveSpeed = 0.02;
-    location = new Location(x, y);
+    setLocation(x, y);
     up = down = left = right = false;
 }
 
@@ -58,6 +58,7 @@ void MainCharacter::updateMovement(Direction dir, bool go) {
 
 
 void MainCharacter::updateLocation() {
+    
     if (up) {
         location->moveUp(moveSpeed);
     }
@@ -74,14 +75,23 @@ void MainCharacter::updateLocation() {
 
 
 
-void MainCharacter::collisionAction(vector<Collider*> colliders) {
-    cout << "Number of colliders: " << colliders.size() << endl;
+void MainCharacter::collisionAction(vector<Collider*> *colliders) {
+    cout << "Number of colliders: " << colliders->size() << endl;
     cout << "Main character collision with following objects:" << endl;
     
-    for (int i = 0; i < colliders.size(); i++) {
-        colliders[i]->getLocation()->print("GameObject");
+    Collider *currentCollider;
+    
+    for (int i = 0; i < colliders->size(); i++) {
+        currentCollider = (*colliders)[i];
+        
+        if (!currentCollider) {
+            cout << "Error: requested collision action for NULL collider" << endl;
+            throw;
+        }
+        
+        currentCollider->getLocation()->print("GameObject");
         cout << "\t at " << endl;
-        colliders[i]->contactPoint(*this)->print("Collider");
+        currentCollider->contactPoint(getCollider())->print("Collider");
     }
 }
 

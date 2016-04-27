@@ -26,7 +26,7 @@ void GameWindow::render() {
     
     //DEBUG
     for (int j = 0; j < gameObjects.size(); j++) {
-        gameObjects[j]->getLocation()->print("please");
+        gameObjects[j]->getLocation()->print("Object");
     }
     
     
@@ -55,9 +55,10 @@ void GameWindow::detectCollisions() {
     for (int i = 0; i < gameObjects.size(); i++) {
         for (int j = 0; j < gameObjects.size(); j++) {
             
-            if (gameObjects[i]->getCollider()->isColliding(*gameObjects[j])) {
+            if (j != i && gameObjects[i]->getCollider()->isColliding(gameObjects[j])) {
                 vector<Collider*> *collidingWith = new vector<Collider*>;
-                gameObjects[i]->collisionAction(*collidingWith);
+                collidingWith->push_back(gameObjects[j]->getCollider());
+                gameObjects[i]->collisionAction(collidingWith);
             }
             
         }

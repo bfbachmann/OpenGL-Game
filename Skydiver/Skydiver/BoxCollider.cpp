@@ -31,14 +31,14 @@ vector<float> *BoxCollider::getBounds() {
 
 
 
-bool BoxCollider::isColliding(GameObject candidate) {
+bool BoxCollider::isColliding(GameObject *candidate) {
     
-    BoxCollider *cadidateCollider = dynamic_cast<BoxCollider*>(candidate.getCollider());
+    BoxCollider *cadidateCollider = dynamic_cast<BoxCollider*>(candidate->getCollider());
     
     if (!cadidateCollider) return false;
     
     Location *parentLocation = this->getLocation();
-    Location *candidateLocation = candidate.getLocation();
+    Location *candidateLocation = candidate->getLocation();
     
     float parentX = parentLocation->getX();
     float parentY = parentLocation->getY();
@@ -59,14 +59,22 @@ bool BoxCollider::isColliding(GameObject candidate) {
 
 
 
-Location *BoxCollider::contactPoint(GameObject candidate) {
-//    if (this->isColliding(candidate)) {
-//        Location *candidateLocation = candidate.getLocation();
-//        Location parentLocation
-//    }
+Location *BoxCollider::contactPoint(Collider *otherCollider) {
     
+    if (!otherCollider) {
+        cout << "Error: requested contact point for NULL collider" << endl;
+    }
     
-    //TODO: IMPLEMENT THIS
-    return NULL;
+    if (!otherCollider->isColliding(parent)) {
+        cout << "Error: requested contact point for gameobject that is not colliding" << endl;
+        throw;
+    }
+    
+    Location *otherColliderLocation = otherCollider->getLocation();
+    
+    float x = (getLocation()->getX() + otherColliderLocation->getX())/2;
+    float y = (getLocation()->getY() + otherColliderLocation->getY())/2;
+    
+    return new Location(x, y);
 
 }

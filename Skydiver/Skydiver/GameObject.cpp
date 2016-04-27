@@ -14,12 +14,25 @@
 
 
 GameObject::GameObject() {
-    collider = NULL;
-    location = NULL;
+    location = new Location();
+}
+
+
+GameObject::GameObject(float newX, float newY) {
+    location = new Location(newX, newY);
 }
 
 
 GameObject::~GameObject() {
+    delete location;
+    if (collider) {
+        delete collider;
+    }
+}
+
+
+void GameObject::setLocation(float x, float y) {
+    location->set(x, y);
 }
 
 
@@ -29,8 +42,8 @@ void GameObject::addCollider(Collider *newCollider) {
 }
 
 
-void GameObject::collisionAction(std::vector<Collider*> colliders) {
-    if (!collider) return;
+void GameObject::collisionAction(std::vector<Collider*> *colliders) {
+    if (colliders->size() == 0) return;
     
     std::cout << "A GameObject has collided!" << endl;
 }

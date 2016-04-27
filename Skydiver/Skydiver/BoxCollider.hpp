@@ -27,8 +27,8 @@ public:
     void setParent(GameObject* newParent) override { parent = newParent; }
     void setBounds(float width, float height);
     Location *getLocation() override { return parent->getLocation(); }
-    bool isColliding(GameObject) override;
-    Location *contactPoint(GameObject) override;
+    bool isColliding(GameObject *otherObject) override;
+    Location *contactPoint(Collider *otherCollider) override;
     std::vector<float> *getBounds();
 };
 

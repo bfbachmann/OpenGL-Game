@@ -19,8 +19,8 @@
 class Collider {
 public:
     virtual void setParent(GameObject* newParent) = 0;
-    virtual bool isColliding(GameObject) = 0;
-    virtual Location *contactPoint(GameObject) = 0;
+    virtual bool isColliding(GameObject *otherObject) = 0;
+    virtual Location *contactPoint(Collider *otherCollider) = 0;
     virtual Location *getLocation() = 0;
 };
 

@@ -20,6 +20,7 @@ using namespace std;
 
 enum Direction {up, down, left, right};
 
+
 class MainCharacter : public GameObject {
 private:
     bool up;
@@ -32,11 +33,10 @@ public:
     MainCharacter(float x, float y);
     ~MainCharacter();
     
-    void render();
-    Location *getLocation() { return location; }
+    void render() override;
     void updateMovement(enum Direction, bool);
     void updateLocation();
-    void collisionAction(vector<Collider*> colliders);
+    void collisionAction(vector<Collider*> *colliders) override;
 };
 
 
