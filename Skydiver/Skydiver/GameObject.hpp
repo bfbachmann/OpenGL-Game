@@ -14,15 +14,17 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "Location.hpp"
+#include <vector>
+
+
+using namespace std;
 
 class Collider;
 
 class GameObject {
-private:
+public:
     Location *location;
     Collider *collider;
-    
-public:
     
     GameObject();
     ~GameObject();
@@ -30,6 +32,7 @@ public:
     void addCollider(Collider * newCollider);
     Collider *getCollider() { return collider; }
     Location *getLocation() { return location; }
+    virtual void collisionAction(vector<Collider*> colliders);
 };
 
 #endif /* GameObject_hpp */

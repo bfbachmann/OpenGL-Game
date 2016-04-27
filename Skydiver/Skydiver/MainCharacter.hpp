@@ -12,12 +12,16 @@
 #include <iostream>
 #include "GameObject.hpp"
 #include "Location.hpp"
+#include <vector>
+
+
+using namespace std;
+
 
 enum Direction {up, down, left, right};
 
 class MainCharacter : public GameObject {
 private:
-    Location *location;
     bool up;
     bool down;
     bool left;
@@ -32,6 +36,7 @@ public:
     Location *getLocation() { return location; }
     void updateMovement(enum Direction, bool);
     void updateLocation();
+    void collisionAction(vector<Collider*> colliders);
 };
 
 

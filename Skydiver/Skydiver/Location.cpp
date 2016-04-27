@@ -34,7 +34,7 @@ void Location::moveTowards(Location *destination) {
         x--;
     } 
     
-     if (destination->getY() > y) {
+    if (destination->getY() > y) {
         y++;
     } else if (destination->getY() < y) {
         y--;

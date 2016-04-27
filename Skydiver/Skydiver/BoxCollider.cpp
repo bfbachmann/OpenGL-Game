@@ -13,8 +13,9 @@
 using namespace std;
 
 
-BoxCollider::BoxCollider(float width, float height) {
+BoxCollider::BoxCollider(float width, float height, GameObject *newParent) {
     setBounds(width, height);
+    this->setParent(newParent);
 }
 
 
@@ -36,7 +37,7 @@ bool BoxCollider::isColliding(GameObject candidate) {
     
     if (!cadidateCollider) return false;
     
-    Location *parentLocation = getLocation();
+    Location *parentLocation = this->getLocation();
     Location *candidateLocation = candidate.getLocation();
     
     float parentX = parentLocation->getX();
@@ -50,7 +51,9 @@ bool BoxCollider::isColliding(GameObject candidate) {
     float canxRange = candidateBounds[0];
     float canyRange = candidateBounds[1];
     
-    if ((fabs(parentX - candidateX) <= xRange + canxRange) && (fabs(parentY - candidateY) <= yRange + canyRange)) return true;
+    if ((fabs(parentX - candidateX) <= xRange + canxRange) && (fabs(parentY - candidateY) <= yRange + canyRange)) {
+        return true;
+    }
     return false;
 }
 

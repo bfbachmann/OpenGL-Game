@@ -19,10 +19,14 @@ private:
     float yRange;
     
 public:
-    BoxCollider(float width, float height);
+    GameObject *parent;
+    
+    BoxCollider(float width, float height, GameObject *newParent);
     ~BoxCollider();
     
+    void setParent(GameObject* newParent) override { parent = newParent; }
     void setBounds(float width, float height);
+    Location *getLocation() override { return parent->getLocation(); }
     bool isColliding(GameObject) override;
     Location *contactPoint(GameObject) override;
     std::vector<float> *getBounds();

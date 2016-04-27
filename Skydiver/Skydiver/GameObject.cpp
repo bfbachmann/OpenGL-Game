@@ -10,6 +10,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "Collider.hpp"
+#include <vector>
 
 
 GameObject::GameObject() {
@@ -19,12 +20,18 @@ GameObject::GameObject() {
 
 
 GameObject::~GameObject() {
-    delete location;
 }
 
 
 void GameObject::addCollider(Collider *newCollider) {
     collider = newCollider;
     collider->setParent(this);
+}
+
+
+void GameObject::collisionAction(std::vector<Collider*> colliders) {
+    if (!collider) return;
+    
+    std::cout << "A GameObject has collided!" << endl;
 }
 

@@ -9,6 +9,11 @@
 #include "MainCharacter.hpp"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <vector>
+#include "Collider.hpp"
+
+
+using namespace std;
 
 
 MainCharacter::MainCharacter(float x, float y) {
@@ -66,6 +71,20 @@ void MainCharacter::updateLocation() {
         location->moveRight(moveSpeed);
     }
 }
+
+
+
+void MainCharacter::collisionAction(vector<Collider*> colliders) {
+    cout << "Number of colliders: " << colliders.size() << endl;
+    cout << "Main character collision with following objects:" << endl;
+    
+    for (int i = 0; i < colliders.size(); i++) {
+        colliders[i]->getLocation()->print("GameObject");
+        cout << "\t at " << endl;
+        colliders[i]->contactPoint(*this)->print("Collider");
+    }
+}
+
 
 
 MainCharacter::~MainCharacter() {
