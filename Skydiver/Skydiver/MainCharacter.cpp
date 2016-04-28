@@ -19,7 +19,8 @@ using namespace std;
 MainCharacter::MainCharacter(float x, float y) {
     moveSpeed = 0.02;
     setLocation(x, y);
-    up = down = left = right = false;
+    upLock = downLock = leftLock = rightLock = up = down = left = right = false;
+    usePhyscis = true;
 }
 
 
@@ -50,13 +51,13 @@ void MainCharacter::render() {
 
 
 void MainCharacter::updateMovement(Direction dir, bool go) {
-    if (dir == Direction::up) {
+    if (dir == Direction::up && !upLock) {
         up = go;
-    } else if (dir == Direction::down) {
+    } else if (dir == Direction::down && !downLock) {
         down = go;
-    } else if (dir == Direction::left) {
+    } else if (dir == Direction::left && !leftLock) {
         left = go;
-    } else if (dir == Direction::right) {
+    } else if (dir == Direction::right && !rightLock) {
         right = go;
     }
 }
@@ -100,8 +101,75 @@ void MainCharacter::collisionAction(vector<Collider*> *colliders) {
     }
     
     cout << endl;
+    
+    collisionMechanics(colliders);
 }
 
+
+
+
+void MainCharacter::collisionMechanics(vector<Collider *> *colliders) {
+    
+    if (!usePhyscis) return;
+    
+    Collider *currentCollider;
+    
+    for (int i = 0; i < colliders->size(); i++) {
+        
+        currentCollider = (*colliders)[i];
+        
+        if (!currentCollider) {
+            cout << "Error: requested collision mechanics for NULL collider" << endl;
+            throw;
+        }
+        
+        Location *contactPoint = collider->contactPoint(currentCollider);
+        float normalX = location->getX() - contactPoint->getX();
+        float normalY = location->getY() - contactPoint->getY();
+        
+        vector<float> colliderBounds = *collider->getBounds();
+        float xBound = colliderBounds[0];
+        float yBound = colliderBounds[1];
+        
+        if (normalY <= yBound) {
+            setMovementLock(Direction::up, true);
+        } else {
+            setMovementLock(Direction::down, true);
+        }
+        
+        if (normalX <= xBound) {
+            setMovementLock(Direction::right, true);
+        } else {
+            setMovementLock(Direction::left, true);
+        }
+         
+    }
+    
+    cout << endl;
+}
+
+
+
+void MainCharacter::setMovementLock(enum Direction dir, bool lock) {
+    
+    switch (dir) {
+        case Direction::up:
+            up = !lock;
+            upLock = lock;
+            
+        case Direction::down:
+            down = !lock;
+            downLock = lock;
+            
+        case Direction::left:
+            left = !lock;
+            leftLock = lock;
+            
+        case Direction::right:
+            right = !lock;
+            rightLock = lock;
+    }
+}
 
 
 MainCharacter::~MainCharacter() {

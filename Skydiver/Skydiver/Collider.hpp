@@ -22,6 +22,7 @@ public:
     virtual bool isColliding(GameObject *otherObject) = 0;
     virtual Location *contactPoint(Collider *otherCollider) = 0;
     virtual Location *getLocation() = 0;
+    virtual vector<float> *getBounds() = 0;
 };
 
 #endif /* Collider_hpp */

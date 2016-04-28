@@ -23,10 +23,10 @@ enum Direction {up, down, left, right};
 
 class MainCharacter : public GameObject {
 private:
-    bool up;
-    bool down;
-    bool left;
-    bool right;
+    bool up, upLock;
+    bool down, downLock;
+    bool left, leftLock;
+    bool right, rightLock;
     float moveSpeed;
     
 public:
@@ -35,8 +35,10 @@ public:
     
     void render() override;
     void updateMovement(enum Direction, bool);
+    void setMovementLock(enum Direction dir, bool lock);
     void updateLocation();
     void collisionAction(vector<Collider*> *colliders) override;
+    void collisionMechanics(vector<Collider*> *colliders) override;
 };
 
 

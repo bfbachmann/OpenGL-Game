@@ -26,6 +26,7 @@ class GameObject {
 public:
     Location *location;
     Collider *collider;
+    bool usePhyscis;
     
     GameObject();
     GameObject(float newX, float newY);
@@ -37,6 +38,7 @@ public:
     Collider *getCollider() { return collider; }
     Location *getLocation() { return location; }
     virtual void collisionAction(vector<Collider*> *colliders);
+    virtual void collisionMechanics(vector<Collider*> *colliders) = 0;
 };
 
 #endif /* GameObject_hpp */

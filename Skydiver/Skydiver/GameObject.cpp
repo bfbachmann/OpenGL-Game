@@ -15,11 +15,13 @@
 
 GameObject::GameObject() {
     location = new Location();
+    usePhyscis = true;
 }
 
 
 GameObject::GameObject(float newX, float newY) {
     location = new Location(newX, newY);
+    usePhyscis = true;
 }
 
 
