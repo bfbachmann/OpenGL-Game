@@ -53,28 +53,12 @@ void MainCharacter::render() {
 void MainCharacter::updateMovement(Direction dir, bool go) {
     if (dir == Direction::up && !upLock) {
         up = go;
-        
-        if (go) {
-            downLock = false;
-        }
     } else if (dir == Direction::down && !downLock) {
         down = go;
-        
-        if (go) {
-            upLock = false;
-        }
     } else if (dir == Direction::left && !leftLock) {
         left = go;
-        
-        if (go) {
-            rightLock = false;
-        }
-    } else if (dir == Direction::right && !rightLock) {
+    } else if (!rightLock) {
         right = go;
-        
-        if (go) {
-            leftLock = false;
-        }
     }
 }
 
@@ -83,15 +67,19 @@ void MainCharacter::updateLocation() {
     
     if (up) {
         location->moveUp(moveSpeed);
+        downLock = false;
     }
     if (down) {
         location->moveDown(moveSpeed);
+        upLock = false;
     }
     if (left) {
         location->moveLeft(moveSpeed);
+        rightLock = false;
     }
     if (right) {
         location->moveRight(moveSpeed);
+        leftLock = false;
     }
 }
 
