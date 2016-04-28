@@ -76,8 +76,10 @@ void MainCharacter::updateLocation() {
 
 
 void MainCharacter::collisionAction(vector<Collider*> *colliders) {
-    cout << "Number of colliders: " << colliders->size() << endl;
-    cout << "Main character collision with following objects:" << endl;
+    
+    cout << "Main character at " << endl;
+    location->print("");
+    cout << " collision with the following " << colliders->size() << " objects:" << endl;
     
     Collider *currentCollider;
     
@@ -90,9 +92,9 @@ void MainCharacter::collisionAction(vector<Collider*> *colliders) {
         }
         
         currentCollider->getLocation()->print("GameObject");
-        cout << "\t at " << endl;
-        currentCollider->contactPoint(getCollider())->print("Collider");
     }
+    
+    cout << endl;
 }
 
 

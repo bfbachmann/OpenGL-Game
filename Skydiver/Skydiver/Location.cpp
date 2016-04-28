@@ -13,16 +13,12 @@ Location::Location() {
     x = 0.0;
     y = 0.0;
     up = down = left = right = false;
-    
-    std::cout << "\tDefualt locaiton created" << std::endl;
 }
 
 
 Location::Location(float newX, float newY) {
     x = newX;
     y = newY;
-    
-    std::cout << "\tNew location (" << x << ", " << y << ")" << std::endl;
 }
 
 

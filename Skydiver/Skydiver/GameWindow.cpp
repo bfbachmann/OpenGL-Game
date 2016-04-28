@@ -22,13 +22,7 @@ GameWindow::GameWindow() {
 
 
 
-void GameWindow::render() {
-    
-    //DEBUG
-    for (int j = 0; j < gameObjects.size(); j++) {
-        gameObjects[j]->getLocation()->print("Object");
-    }
-    
+void GameWindow::render() {   
     
     detectCollisions();
     
@@ -53,14 +47,17 @@ void GameWindow::detectCollisions() {
     
     //TODO: MAKE THIS FASTER
     for (int i = 0; i < gameObjects.size(); i++) {
+        
+        vector<Collider*> *collidingWith = new vector<Collider*>;
+        
         for (int j = 0; j < gameObjects.size(); j++) {
             
             if (j != i && gameObjects[i]->getCollider()->isColliding(gameObjects[j])) {
-                vector<Collider*> *collidingWith = new vector<Collider*>;
                 collidingWith->push_back(gameObjects[j]->getCollider());
-                gameObjects[i]->collisionAction(collidingWith);
             }
-            
         }
+        
+        gameObjects[i]->collisionAction(collidingWith);
+        delete collidingWith;
     }
 }
