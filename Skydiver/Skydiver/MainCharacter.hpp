@@ -18,9 +18,6 @@
 using namespace std;
 
 
-enum Direction {up, down, left, right};
-
-
 class MainCharacter : public GameObject {
 private:
     bool up, upLock;

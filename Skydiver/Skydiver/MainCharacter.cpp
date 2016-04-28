@@ -53,12 +53,28 @@ void MainCharacter::render() {
 void MainCharacter::updateMovement(Direction dir, bool go) {
     if (dir == Direction::up && !upLock) {
         up = go;
+        
+        if (go) {
+            downLock = false;
+        }
     } else if (dir == Direction::down && !downLock) {
         down = go;
+        
+        if (go) {
+            upLock = false;
+        }
     } else if (dir == Direction::left && !leftLock) {
         left = go;
+        
+        if (go) {
+            rightLock = false;
+        }
     } else if (dir == Direction::right && !rightLock) {
         right = go;
+        
+        if (go) {
+            leftLock = false;
+        }
     }
 }
 
@@ -123,25 +139,9 @@ void MainCharacter::collisionMechanics(vector<Collider *> *colliders) {
             throw;
         }
         
-        Location *contactPoint = collider->contactPoint(currentCollider);
-        float normalX = location->getX() - contactPoint->getX();
-        float normalY = location->getY() - contactPoint->getY();
+        Direction dir = collider->contactPoint(currentCollider);
         
-        vector<float> colliderBounds = *collider->getBounds();
-        float xBound = colliderBounds[0];
-        float yBound = colliderBounds[1];
-        
-        if (normalY <= yBound) {
-            setMovementLock(Direction::up, true);
-        } else {
-            setMovementLock(Direction::down, true);
-        }
-        
-        if (normalX <= xBound) {
-            setMovementLock(Direction::right, true);
-        } else {
-            setMovementLock(Direction::left, true);
-        }
+        setMovementLock(dir, true);
          
     }
     
@@ -152,23 +152,26 @@ void MainCharacter::collisionMechanics(vector<Collider *> *colliders) {
 
 void MainCharacter::setMovementLock(enum Direction dir, bool lock) {
     
-    switch (dir) {
-        case Direction::up:
-            up = !lock;
-            upLock = lock;
-            
-        case Direction::down:
-            down = !lock;
-            downLock = lock;
-            
-        case Direction::left:
-            left = !lock;
-            leftLock = lock;
-            
-        case Direction::right:
-            right = !lock;
-            rightLock = lock;
+    if (dir == Direction::up) {
+        if (lock) up = false;
+        upLock = lock;
     }
+    
+    else if (dir == Direction::down) {
+        if (lock) down = false;
+        downLock = lock;
+    }
+    
+    else if (dir == Direction::left) {
+        if (lock) left = false;
+        leftLock = lock;
+    }
+    
+    else {
+        if (lock) right = false;
+        rightLock = lock;
+    }
+    
 }
 
 

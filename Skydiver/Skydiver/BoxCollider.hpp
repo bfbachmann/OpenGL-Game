@@ -28,8 +28,8 @@ public:
     void setBounds(float width, float height);
     Location *getLocation() override { return parent->getLocation(); }
     bool isColliding(GameObject *otherObject) override;
-    Location *contactPoint(Collider *otherCollider) override;
-    std::vector<float> *getBounds();
+    Direction contactPoint(Collider *otherCollider) override;
+    std::vector<float> *getBounds() override;
 };
 
 

@@ -15,6 +15,9 @@
 #include <GLFW/glfw3.h>
 
 
+enum Direction {up, down, left, right};
+
+
 class Location {
 private:
     float x;
