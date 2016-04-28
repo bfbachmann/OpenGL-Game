@@ -57,7 +57,7 @@ void GameWindow::detectCollisions() {
             }
         }
         
-        gameObjects[i]->collisionAction(collidingWith);
+        if (collidingWith->size() > 0) gameObjects[i]->collisionAction(collidingWith);
         delete collidingWith;
     }
 }
