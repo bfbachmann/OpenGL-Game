@@ -36,6 +36,8 @@ public:
     void updateLocation();
     void collisionAction(vector<Collider*> *colliders) override;
     void collisionMechanics(vector<Collider*> *colliders) override;
+    bool isMoving(Direction dir) override;
+    bool isMoving() override { return up || down || left || right; }
 };
 
 

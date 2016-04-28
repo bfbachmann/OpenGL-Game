@@ -39,6 +39,8 @@ public:
     Location *getLocation() { return location; }
     virtual void collisionAction(vector<Collider*> *colliders);
     virtual void collisionMechanics(vector<Collider*> *colliders) = 0;
+    virtual bool isMoving(Direction dir) = 0;
+    virtual bool isMoving() = 0;
 };
 
 #endif /* GameObject_hpp */

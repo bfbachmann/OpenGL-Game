@@ -34,6 +34,8 @@ vector<float> *BoxCollider::getBounds() {
 
 bool BoxCollider::isColliding(GameObject *candidate) {
     
+    if (!parent->isMoving()) return false;
+    
     BoxCollider *cadidateCollider = dynamic_cast<BoxCollider*>(candidate->getCollider());
     
     if (!cadidateCollider) return false;
@@ -65,12 +67,7 @@ Direction BoxCollider::contactPoint(Collider *otherCollider) {
     if (!otherCollider) {
         cout << "Error: requested contact point for NULL collider" << endl;
     }
-    
-    if (!otherCollider->isColliding(parent)) {
-        cout << "Error: requested contact point for gameobject that is not colliding" << endl;
-        throw;
-    }
-    
+
     Location *location = getLocation();
     vector<float> bounds = *getBounds();
     Location *otherColliderLocation = otherCollider->getLocation();
@@ -83,46 +80,81 @@ Direction BoxCollider::contactPoint(Collider *otherCollider) {
     
     float otherUpperXbound = otherX + otherColliderBounds[0];
     float otherLowerXbound = otherX - otherColliderBounds[0];
+    float otherUpperYbound = otherY + otherColliderBounds[1];
+    float otherLowerYbound = otherY - otherColliderBounds[1];
     
     float upperXbound = x + bounds[0];
     float lowerXbound = x - bounds[0];
+    float upperYbound = y + bounds[1];
+    float lowerYbound = y - bounds[1];
     
     float deltaX = otherX - x;
     float deltaY = otherY - y;
     
-    if ((otherLowerXbound <= upperXbound && otherLowerXbound >= lowerXbound) || (otherUpperXbound <= upperXbound && otherUpperXbound >= lowerXbound) ||
-           (lowerXbound <= otherUpperXbound && lowerXbound >= otherLowerXbound) || (upperXbound <= otherUpperXbound && upperXbound >= otherLowerXbound)) {
-        
-        //we know the two colliders are touching on their top and bottom sides
-        
-        if (deltaY > 0) {
-            //contact on this collider's top face
-            
-            cout << "Top face" << endl;
-            return Direction::up;
-        } else {
-            //contact on this collider's bottom face
-            
-            cout << "Bottom face" << endl;
-            return Direction::down;
-        }
-        
+    float xOverlap;
+    float yOverlap;
+    
+    bool up = false;
+    bool left = false;
+    
+    if (deltaX > 0) {
+        //other collider is to our right
+        xOverlap = upperXbound - otherLowerXbound;
+    } else {
+        xOverlap = otherUpperXbound - lowerXbound;
+        left = true;
     }
     
-    else {
-        //we know the two colliders are touching on ther left and right sides
-        
-        if (deltaX > 0) {
-            //contact on this collider's right face
-            
-            cout << "Right face" << endl;
-            return Direction::right;
-        } else {
-            //contact on this collider's left face
-            
-            cout << "Left face" << endl;
-            return Direction::left;
-        }
+    if (deltaY > 0) {
+        //other collider is above us
+        yOverlap = upperYbound - otherLowerYbound;
+        up = true;
+    } else {
+        yOverlap = otherUpperYbound - lowerYbound;
     }
+    
+    if (xOverlap > yOverlap) {
+        if (up) return Direction::up;
+        return Direction::down;
+    } else {
+        if (left) return Direction::left;
+        return Direction::right;
+    }
+    
+    
+//    if ((otherLowerXbound <= upperXbound && otherLowerXbound >= lowerXbound) || (otherUpperXbound <= upperXbound && otherUpperXbound >= lowerXbound) ||
+//           (lowerXbound <= otherUpperXbound && lowerXbound >= otherLowerXbound) || (upperXbound <= otherUpperXbound && upperXbound >= otherLowerXbound)) {
+//        
+//        //we know the two colliders are touching on their top and bottom sides
+//        
+//        if (deltaY > 0) {
+//            //contact on this collider's top face
+//            
+//            cout << "Top face" << endl;
+//            return Direction::up;
+//        } else {
+//            //contact on this collider's bottom face
+//            
+//            cout << "Bottom face" << endl;
+//            return Direction::down;
+//        }
+//        
+//    }
+//    
+//    else {
+//        //we know the two colliders are touching on ther left and right sides
+//        
+//        if (deltaX > 0) {
+//            //contact on this collider's right face
+//            
+//            cout << "Right face" << endl;
+//            return Direction::right;
+//        } else {
+//            //contact on this collider's left face
+//            
+//            cout << "Left face" << endl;
+//            return Direction::left;
+//        }
+//    }
 
 }

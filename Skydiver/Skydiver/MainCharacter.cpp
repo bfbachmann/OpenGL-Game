@@ -175,6 +175,12 @@ void MainCharacter::setMovementLock(enum Direction dir, bool lock) {
 }
 
 
+bool MainCharacter::isMoving(Direction dir) {
+    if ((dir == Direction::up && up) || (dir == Direction::down && down) || (dir == Direction::left && left) || (dir == Direction::right && right)) return true;
+    return false;
+}
+
+
 MainCharacter::~MainCharacter() {
     delete location;
 }
