@@ -1,29 +1,30 @@
-//
-//  GameWindow.hpp
-//  Skydiver
-//
-//  Created by Bruno Bachmann on 2016-04-26.
-//  Copyright © 2016 Bruno Bachmann. All rights reserved.
-//
+
 
 #ifndef GameWindow_hpp
 #define GameWindow_hpp
 
 #include <stdio.h>
-#include "MainCharacter.hpp"
+#include "Particle.hpp"
 #include <vector>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
+#define MAX_PARTICLES 200
 
 using namespace std;
 
 
 class GameWindow {
+private:
+    vector<Particle*> particles;
+    
 public:
     vector<GameObject*> gameObjects;
     
     GameWindow();
     ~GameWindow();
-    void render();
+    void manageTrackingParticles(float mouseX, float mouseY);
+    void render(GLFWwindow *gw);
     void detectCollisions();
 };
 

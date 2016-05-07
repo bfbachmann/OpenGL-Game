@@ -1,10 +1,4 @@
-//
-//  MainCharacter.cpp
-//  Skydiver
-//
-//  Created by Bruno Bachmann on 2016-04-10.
-//  Copyright © 2016 Bruno Bachmann. All rights reserved.
-//
+
 
 #include "MainCharacter.hpp"
 #include <GL/glew.h>

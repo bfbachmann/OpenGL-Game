@@ -1,10 +1,4 @@
-//
-//  GameObject.hpp
-//  Skydiver
-//
-//  Created by Bruno Bachmann on 2016-04-09.
-//  Copyright © 2016 Bruno Bachmann. All rights reserved.
-//
+
 
 #ifndef GameObject_hpp
 #define GameObject_hpp

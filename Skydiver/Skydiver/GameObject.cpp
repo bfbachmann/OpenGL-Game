@@ -1,10 +1,4 @@
-//
-//  GameObject.cpp
-//  Skydiver
-//
-//  Created by Bruno Bachmann on 2016-04-09.
-//  Copyright © 2016 Bruno Bachmann. All rights reserved.
-//
+
 
 #include "GameObject.hpp"
 #include <GL/glew.h>
@@ -18,7 +12,7 @@ GameObject::GameObject() {
     usePhyscis = true;
 }
 
-
+/* Create a new gameObject at locaiton (newX, newY) */
 GameObject::GameObject(float newX, float newY) {
     location = new Location(newX, newY);
     usePhyscis = true;
@@ -27,9 +21,9 @@ GameObject::GameObject(float newX, float newY) {
 
 GameObject::~GameObject() {
     delete location;
-    if (collider) {
-        delete collider;
-    }
+//    if (collider != NULL) {
+//        delete collider;
+//    }
 }
 
 

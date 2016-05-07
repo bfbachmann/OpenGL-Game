@@ -1,10 +1,3 @@
-//
-//  MainCharacter.hpp
-//  Skydiver
-//
-//  Created by Bruno Bachmann on 2016-04-10.
-//  Copyright © 2016 Bruno Bachmann. All rights reserved.
-//
 
 #ifndef MainCharacter_hpp
 #define MainCharacter_hpp

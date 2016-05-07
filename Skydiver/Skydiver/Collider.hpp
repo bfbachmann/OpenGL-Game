@@ -1,10 +1,4 @@
-//
-//  Collider.hpp
-//  Skydiver
-//
-//  Created by Bruno Bachmann on 2016-04-24.
-//  Copyright © 2016 Bruno Bachmann. All rights reserved.
-//
+
 
 #ifndef Collider_hpp
 #define Collider_hpp
@@ -18,6 +12,7 @@
 
 class Collider {
 public:
+//    ~Collider();
     virtual void setParent(GameObject* newParent) = 0;
     virtual bool isColliding(GameObject *otherObject) = 0;
     virtual Direction contactPoint(Collider *otherCollider) = 0;
