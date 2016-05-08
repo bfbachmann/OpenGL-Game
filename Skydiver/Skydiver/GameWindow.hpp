@@ -22,7 +22,11 @@ private:
     
 public:
     vector<GameObject*> gameObjects;
-    bool trackMouse = false;
+    bool trackMouse = true;
+    bool particleVortexAtCursor_b = false;
+    bool circularParticleEmitterAtCenter_b = false;
+    bool reverseEmitterAtCenter_b = false;
+    bool emitterAtCenter_b = false;
     
     GameWindow();
     ~GameWindow();

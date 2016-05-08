@@ -65,6 +65,7 @@ void GameWindow::manageTrackingParticles(float mouseX, float mouseY) {
         mouseY = 1 - mouseY/(WINDOW_HEIGHT/2);
         
         Particle *particle = new Particle(mouseX, mouseY);
+        particle->setColor(sin(clock()), sin(clock()), sin(clock()));
         
         if (particles.size() >= MAX_PARTICLES) {
             delete particles[0];
@@ -75,10 +76,10 @@ void GameWindow::manageTrackingParticles(float mouseX, float mouseY) {
     }
     
     // Call particle movement funcitons:
-//    particleVortexAtCursor(mouseX, mouseY);
-//    circularParticleEmitterAtCenter();
-//    reverseEmitterAtCenter();
-    emitterAtCenter();
+    if (particleVortexAtCursor_b) particleVortexAtCursor(mouseX, mouseY);
+    if (circularParticleEmitterAtCenter_b) circularParticleEmitterAtCenter();
+    if (reverseEmitterAtCenter_b) reverseEmitterAtCenter();
+    if (emitterAtCenter_b) emitterAtCenter();
 }
 
 
