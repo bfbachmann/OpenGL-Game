@@ -11,6 +11,7 @@ Particle::Particle(float xpos, float ypos) {
 
 
 void Particle::setColor(float red, float blue, float green) {
+    if (red < 0.2 && green < 0.2 && blue < 0.2) { red = green = blue = 1; }
     color.red = red;
     color.blue = blue;
     color.green = green;
@@ -18,8 +19,7 @@ void Particle::setColor(float red, float blue, float green) {
 
 
 void Particle::setRandomColor() {
-    float time = clock();
-    setColor(sin(time), cos(time), sin(time));
+    setColor(sin(clock()), cos(clock()), sin(clock()));
 }
 
 

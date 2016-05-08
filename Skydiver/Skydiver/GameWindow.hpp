@@ -22,6 +22,7 @@ private:
     
 public:
     vector<GameObject*> gameObjects;
+    bool trackMouse = false;
     
     GameWindow();
     ~GameWindow();
@@ -31,6 +32,7 @@ public:
     void particleVortexAtCursor(float mouseX, float mouseY);
     void circularParticleEmitterAtCenter();
     void reverseEmitterAtCenter();
+    void emitterAtCenter();
 };
 
 

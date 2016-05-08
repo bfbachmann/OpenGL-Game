@@ -60,22 +60,25 @@ GameWindow::~GameWindow() {
  */
 void GameWindow::manageTrackingParticles(float mouseX, float mouseY) {
     
-    mouseX = mouseX/(WINDOW_WIDTH/2) - 1;
-    mouseY = 1 - mouseY/(WINDOW_HEIGHT/2);
-    
-    Particle *particle = new Particle(mouseX, mouseY);
-
-    if (particles.size() >= MAX_PARTICLES) {
-        delete particles[0];
-        particles.erase(particles.begin());
+    if (trackMouse) {
+        mouseX = mouseX/(WINDOW_WIDTH/2) - 1;
+        mouseY = 1 - mouseY/(WINDOW_HEIGHT/2);
+        
+        Particle *particle = new Particle(mouseX, mouseY);
+        
+        if (particles.size() >= MAX_PARTICLES) {
+            delete particles[0];
+            particles.erase(particles.begin());
+        }
+        
+        particles.push_back(particle);
     }
-    
-    particles.push_back(particle);
     
     // Call particle movement funcitons:
 //    particleVortexAtCursor(mouseX, mouseY);
 //    circularParticleEmitterAtCenter();
 //    reverseEmitterAtCenter();
+    emitterAtCenter();
 }
 
 
@@ -156,6 +159,31 @@ void GameWindow::reverseEmitterAtCenter() {
     particleVortexAtCursor(0, 0);
 }
 
+
+
+void GameWindow::emitterAtCenter() {
+    float x = rand() % 200 - 99;
+    float y = rand() % 200 - 99;
+    
+    Particle *particle = new Particle(0, 0);
+    particle->setRandomColor();
+    particle->getTrajectory()->set(x, y);
+    particle->getTrajectory()->normalize();
+    particle->getTrajectory()->scale(0.03);
+    
+    if (particles.size() >= MAX_PARTICLES) {
+        std::cout << "Hit max particles" << endl;
+        delete particles[0];
+        particles.erase(particles.begin());
+    }
+    
+    particles.push_back(particle);
+    
+    for (int i = 0; i < particles.size(); i++) {
+        Vector2 *traj = particles[i]->getTrajectory();
+        traj->scale(0.98);
+    }
+}
 
 
 
