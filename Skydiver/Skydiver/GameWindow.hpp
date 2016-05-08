@@ -9,7 +9,9 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#define MAX_PARTICLES 200
+#define MAX_PARTICLES 1000
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 800
 
 using namespace std;
 
@@ -26,6 +28,9 @@ public:
     void manageTrackingParticles(float mouseX, float mouseY);
     void render(GLFWwindow *gw);
     void detectCollisions();
+    void particleVortexAtCursor(float mouseX, float mouseY);
+    void circularParticleEmitterAtCenter();
+    void reverseEmitterAtCenter();
 };
 
 

@@ -35,6 +35,7 @@ public:
     void set(float newX, float newY);
     void set(Location loc);
     void print(std::string name);
+    Location operator-(Location loc);
 };
 
 #endif /* Location_hpp */

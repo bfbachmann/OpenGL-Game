@@ -76,3 +76,15 @@ void Location::set(Location loc) {
 void Location::print(std::string name) {
     std::cout << "\t" << name << " location: (" << x << ", " << y << ")" << std::endl;
 }
+
+
+Location Location::operator-(Location loc) {
+    
+    Location newLoc;
+    float locX = loc.getX();
+    float locY = loc.getY();
+    
+    newLoc.set(x - locX, y - locY);
+
+    return newLoc;
+}
