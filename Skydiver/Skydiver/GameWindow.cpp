@@ -80,6 +80,7 @@ void GameWindow::manageTrackingParticles(float mouseX, float mouseY) {
     if (circularParticleEmitterAtCenter_b) circularParticleEmitterAtCenter();
     if (reverseEmitterAtCenter_b) reverseEmitterAtCenter();
     if (emitterAtCenter_b) emitterAtCenter();
+    if (particleRing_b) particleRing();
 }
 
 
@@ -110,7 +111,6 @@ void GameWindow::circularParticleEmitterAtCenter() {
     particle->setRandomColor();
     
     if (particles.size() >= MAX_PARTICLES) {
-        std::cout << "Max particles reached" << endl;
         delete particles[0];
         particles.erase(particles.begin());
     }
@@ -167,13 +167,13 @@ void GameWindow::emitterAtCenter() {
     float y = rand() % 200 - 99;
     
     Particle *particle = new Particle(0, 0);
+    Vector2 *traj = particle->getTrajectory();
     particle->setRandomColor();
-    particle->getTrajectory()->set(x, y);
-    particle->getTrajectory()->normalize();
-    particle->getTrajectory()->scale(0.03);
+    traj->set(x, y);
+    traj->normalize();
+    traj->scale(0.03);
     
     if (particles.size() >= MAX_PARTICLES) {
-        std::cout << "Hit max particles" << endl;
         delete particles[0];
         particles.erase(particles.begin());
     }
@@ -183,6 +183,28 @@ void GameWindow::emitterAtCenter() {
     for (int i = 0; i < particles.size(); i++) {
         Vector2 *traj = particles[i]->getTrajectory();
         traj->scale(0.98);
+    }
+}
+
+
+
+void GameWindow::particleRing() {
+    Particle *particle = new Particle(-1, 0);
+    Vector2 *traj = particle->getTrajectory();
+    traj->set(0, 1);
+    traj->scale(0.03);
+    
+    if (particles.size() >= MAX_PARTICLES) {
+        delete particles[0];
+        particles.erase(particles.begin());
+    }
+    
+    particles.push_back(particle);
+    
+    for (int i = 0; i < particles.size(); i++) {
+        long time = clock();
+        particles[i]->getLocation()->set(0.09*cos(time), 0.09*sin(time));
+        
     }
 }
 
@@ -205,4 +227,14 @@ void GameWindow::detectCollisions() {
         if (collidingWith->size() > 0) gameObjects[i]->collisionAction(collidingWith);
         delete collidingWith;
     }
+}
+
+
+void GameWindow::printStatus() {
+    cout << "circularParticleEmitterAtCenter \t" << circularParticleEmitterAtCenter_b << endl;
+    cout << "emitterAtCenter \t" << emitterAtCenter_b << endl;
+    cout << "particleVortexAtCursor \t" << particleVortexAtCursor_b << endl;
+    cout << "reverseEmitterAtCenter_b \t" << reverseEmitterAtCenter_b << endl;
+    cout << "particleRing \t" << particleRing_b << endl;
+    cout << "Track mouse \t" << trackMouse << endl << endl;
 }
