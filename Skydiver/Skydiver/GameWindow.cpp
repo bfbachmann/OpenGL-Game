@@ -20,7 +20,6 @@ GameWindow::GameWindow() {
 
 
 
-
 void GameWindow::render(GLFWwindow *gw) {
     
     double xpos;
@@ -81,6 +80,7 @@ void GameWindow::manageTrackingParticles(float mouseX, float mouseY) {
     if (reverseEmitterAtCenter_b) reverseEmitterAtCenter();
     if (emitterAtCenter_b) emitterAtCenter();
     if (particleRing_b) particleRing();
+    if (particleSpiral_b) particleSpiral();
 }
 
 
@@ -230,11 +230,42 @@ void GameWindow::detectCollisions() {
 }
 
 
+
+void GameWindow::particleSpiral() {
+    
+//    Particle *particle = new Particle(-0.9, 0);
+//    Vector2 *traj = particle->getTrajectory();
+//    traj->set(0.0, 0.01);
+//    traj->normalize();
+//    traj->scale(0.003);
+//    
+//    if (particles.size() >= MAX_PARTICLES) {
+//        delete particles[0];
+//        particles.erase(particles.begin());
+//    }
+//    
+//    particles.push_back(particle);
+    
+    float x, y;
+    
+    for (int i = 0; i < particles.size() - 1; i++) {
+        Location *loc = particles[i]->getLocation();
+        Vector2 *traj = particles[i]->getTrajectory();
+        x = 0 - loc->getX()/6;
+        y = 0 - loc->getY()/6;
+        traj->add(x, y);
+        traj->normalize();
+        traj->scale(0.005);
+    }
+}
+
+
 void GameWindow::printStatus() {
     cout << "circularParticleEmitterAtCenter \t" << circularParticleEmitterAtCenter_b << endl;
     cout << "emitterAtCenter \t" << emitterAtCenter_b << endl;
     cout << "particleVortexAtCursor \t" << particleVortexAtCursor_b << endl;
     cout << "reverseEmitterAtCenter_b \t" << reverseEmitterAtCenter_b << endl;
     cout << "particleRing \t" << particleRing_b << endl;
+    cout << "particleSpiral \t" << particleSpiral_b << endl;
     cout << "Track mouse \t" << trackMouse << endl << endl;
 }

@@ -28,6 +28,7 @@ public:
     bool reverseEmitterAtCenter_b = false;
     bool emitterAtCenter_b = false;
     bool particleRing_b = false;
+    bool particleSpiral_b = false;
     
     GameWindow();
     ~GameWindow();
@@ -40,6 +41,7 @@ public:
     void emitterAtCenter();
     void particleRing();
     void printStatus();
+    void particleSpiral();
 };
 
 

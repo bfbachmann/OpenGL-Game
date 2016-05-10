@@ -20,6 +20,8 @@ public:
     void scale(float factor);
     float magnitude();
     void normalize();
+    void add(Vector2 *vec);
+    void add(float xval, float yval);
 };
 
 #endif /* Vector2_hpp */

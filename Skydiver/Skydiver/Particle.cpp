@@ -55,4 +55,5 @@ void Particle::updateLocation() {
 
 Particle::~Particle() {
     delete location;
+    delete trajectory;
 }
